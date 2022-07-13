@@ -5,7 +5,7 @@ style.textContent = `
 	table { border-collapse:collapse; width:100%; table-layout:fixed; }
 	tr { border-top:1px solid #768692; }
 	tr:nth-child(odd) { background-color:#E8EDEE; }
-	th, td { padding:1rem; textalign:left; }
+	th, td { padding:1rem; text-align:left; }
 `;
 
 const d = {};
