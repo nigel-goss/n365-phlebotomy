@@ -1,10 +1,10 @@
 const style = document.createElement("style");
 document.head.appendChild(style);
 style.textContent = `
-	body { font-family:Arial; }
+	body { font-family:Arial; margin:0; color:#231F20; }
 	table { border-collapse:collapse; width:100%; }
-	tr { border-top:1px solid grey; }
-	tr:nth-child(odd) { background-color:lightgrey; }
+	tr { border-top:1px solid #768692; }
+	tr:nth-child(odd) { background-color:#E8EDEE; }
 	td { padding:1rem; }
 `;
 
