@@ -2,13 +2,14 @@ const style = document.createElement("style");
 document.head.appendChild(style);
 style.textContent = `
 	body { font-family:Arial; }
-	table { border-collapse:collapse; }
-	tr:nth-child(odd) { background-color:lightgrey; border-top:1px solid grey;}
+	table { border-collapse:collapse; width:100%; }
+	tr { border-top:1px solid grey; }
+	tr:nth-child(odd) { background-color:lightgrey; }
 	td { padding:1rem; }
-
 `;
 
 const d = {};
+let slots = {};
 	
 $d.forEach(($v) => {
 
@@ -22,7 +23,9 @@ $d.forEach(($v) => {
 		d[dt] = {};
 	}
 
-	const slot = $v.requiredAttendees.replace("thhPhlebotomyBloodTest+", "").replace("@nhs.onmicrosoft.com;", "")
+	const slot = $v.requiredAttendees.replace("thhPhlebotomyBloodTest+", "").replace("@nhs.onmicrosoft.com;", "");
+	slots[slot] = null;
+	
 	const body = $v.body.replaceAll("\r\n", "").split("<br>");
 
 	d[dt][slot] = body.find(($x) => { return $x.includes("Name:"); }).replace("Name: ", "");
@@ -31,6 +34,8 @@ $d.forEach(($v) => {
 	
 const table = document.createElement("table");
 document.body.appendChild(table);
+
+slots = Object.keys(slots).sort();
 
 Object.keys(d).forEach(($v) => {
 
@@ -41,7 +46,7 @@ Object.keys(d).forEach(($v) => {
 	tr.appendChild(td);
 	td.textContent = $v;
 
-	["01", "02", "03", "04", "05", "06", "07", "08"].forEach(($v2) => {
+	slots.forEach(($v2) => {
 		const td = document.createElement("td");
 		tr.appendChild(td);
 		td.textContent = d[$v][$v2];
