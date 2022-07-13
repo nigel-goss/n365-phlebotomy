@@ -2,7 +2,7 @@ const style = document.createElement("style");
 document.head.appendChild(style);
 style.textContent = `
 	body { font-family:Arial; margin:0; color:#231F20; }
-	table { border-collapse:collapse; width:100%; }
+	table { border-collapse:collapse; width:100%; table-layout:fixed; }
 	tr { border-top:1px solid #768692; }
 	tr:nth-child(odd) { background-color:#E8EDEE; }
 	td { padding:1rem; }
@@ -36,6 +36,19 @@ const table = document.createElement("table");
 document.body.appendChild(table);
 
 slots = Object.keys(slots).sort();
+
+const tr = document.createElement("tr");
+table.appendChild(tr);
+
+const th = document.createElement("th");
+tr.appendChild(th);
+th.textContent = "DateTime";
+
+slots.forEach(($v) => {
+	const th = document.createElement("th");
+	tr.appendChild(th);
+	th.textContent = $v;
+});
 
 Object.keys(d).forEach(($v) => {
 
