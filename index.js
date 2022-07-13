@@ -1,3 +1,13 @@
+const style = document.createElement("style");
+document.head.appendChild(style);
+style.textContent = `
+	body { font-family:Arial; }
+	table { border-collapse:collapse; }
+	tr:nth-child(odd) { background-color:lightgrey; border-top:1px solid grey;}
+	td { padding:1rem; }
+
+`;
+
 const d = {};
 	
 $d.forEach(($v) => {
