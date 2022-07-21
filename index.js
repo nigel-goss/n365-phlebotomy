@@ -19,7 +19,7 @@ $d.forEach(($v) => {
 		return;
 	}
 
-	const dt = new Date($v.start).toLocaleString("en-GB", {day:"numeric", month:"short", year:"numeric", hour:"numeric", minute:"numeric"}).replace(",", "");
+	const dt = new Date($v.startWithTimeZone).toLocaleString("en-GB", {day:"numeric", month:"short", year:"numeric", hour:"numeric", minute:"numeric"}).replace(",", "");
 
 	if (d[dt] === undefined) {
 		d[dt] = {};
