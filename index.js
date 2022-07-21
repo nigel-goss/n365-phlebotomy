@@ -38,6 +38,8 @@ $d.forEach(($v) => {
 	];
 	
 });
+
+slots = Object.keys(slots).sort();
 	
 const table = document.createElement("table");
 document.body.appendChild(table);
@@ -49,7 +51,7 @@ const th = document.createElement("th");
 tr.appendChild(th);
 th.textContent = "DateTime";
 
-Object.keys(slots).sort().forEach(($v) => {
+slots.forEach(($v) => {
 	const th = document.createElement("th");
 	tr.appendChild(th);
 	th.textContent = $v;
