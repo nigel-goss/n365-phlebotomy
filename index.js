@@ -62,7 +62,7 @@ Object.keys(d).forEach(($v) => {
 	const tr = document.createElement("tr");
 	table.appendChild(tr);
 
-	let td = document.createElement("td");
+	const td = document.createElement("td");
 	tr.appendChild(td);
 	td.textContent = $v;
 
