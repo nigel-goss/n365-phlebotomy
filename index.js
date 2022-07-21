@@ -6,6 +6,8 @@ style.textContent = `
 	tr { border-top:1px solid #768692; }
 	tr:nth-child(odd) { background-color:#E8EDEE; }
 	th, td { padding:0.3rem; text-align:left; }
+	td div:first-of-type { font-weight:bold; }
+	div { padding:0.2rem; }
 `;
 
 const d = {};
@@ -25,17 +27,20 @@ $d.forEach(($v) => {
 
 	const slot = $v.requiredAttendees.replace("thhPhlebotomyBloodTest+", "").replace("@nhs.onmicrosoft.com;", "");
 	slots[slot] = null;
+
+	let body = $v.body.replaceAll("Question 1- Who sent you for a blood test<br>\r\nAnswer-", "Referrer:");
+	body = body.split("<br>\r\n");
+
+	d[dt][slot] = [
+		body.find(($x) => { return $x.includes("Name:"); }),
+		body.find(($x) => { return $x.includes("Email:"); }),
+		body.find(($x) => { return $x.includes("Referrer:"); }),
+	];
 	
-	const body = $v.body.replaceAll("\r\n", "").split("<br>");
-
-	d[dt][slot] = body.find(($x) => { return $x.includes("Name:"); }).replace("Name: ", "");
-
 });
 	
 const table = document.createElement("table");
 document.body.appendChild(table);
-
-slots = Object.keys(slots).sort();
 
 const tr = document.createElement("tr");
 table.appendChild(tr);
@@ -44,7 +49,7 @@ const th = document.createElement("th");
 tr.appendChild(th);
 th.textContent = "DateTime";
 
-slots.forEach(($v) => {
+Object.keys(slots).sort().forEach(($v) => {
 	const th = document.createElement("th");
 	tr.appendChild(th);
 	th.textContent = $v;
@@ -60,9 +65,16 @@ Object.keys(d).forEach(($v) => {
 	td.textContent = $v;
 
 	slots.forEach(($v2) => {
+		
 		const td = document.createElement("td");
 		tr.appendChild(td);
-		td.textContent = d[$v][$v2];
+
+		d[$v][$v2].forEach(($v3) => {
+			const div = document.createElement("div");
+			td.appendChild(div);
+			div.textContent = $v3;
+		});
+		
 	});
 		
 });
